@@ -1,18 +1,7 @@
 from django.shortcuts import render
+from .models import Car
 # Add the following import
 from django.http import HttpResponse
-
-class Car:  # Note that parens are optional if not inheriting from another class
-  def __init__(self, make, model, year):
-    self.make = make
-    self.model = model
-    self.year = year
-
-cars = [
-  Car('Chevrolet', 'Chevelle', 1970),
-  Car('Oldsmobile', '442', 1969),
-  Car('Plymouth', 'Barracuda', 1972)
-]
 
 # Create your views here.
 # Define the home view
@@ -25,4 +14,10 @@ def about(request):
 
 # Define the index view
 def cars_index(request):
+  cars = Car.objects.all()
   return render(request, 'cars/index.html', {'cars': cars})
+
+#  Define the details view
+def cars_detail(request, car_id):
+  car = Car.objects.get(id=car_id)
+  return render(request, 'cars/detail.html', { 'car': car })
