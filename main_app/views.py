@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Car
+from .forms import ServicesForm
 
 
 # Create your views here.
@@ -24,7 +25,7 @@ def cars_detail(request, car_id):
 
 def add_service(request, car_id):
   # create a ModelForm instance using the data in request.POST
-  form = ServiceForm(request.POST)
+  form = ServicesForm(request.POST)
   # validate the form
   if form.is_valid():
     # don't save the form to the db until it

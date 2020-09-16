@@ -40,7 +40,7 @@
 </div>
 <script>
   const dateEl = document.getElementById('id_date');
-  M.Datepicker.init(dateEl, {
+  S.Datepicker.init(dateEl, {
     format: 'yyyy-mm-dd',
     defaultDate: new Date(),
     setDefaultDate: true,
@@ -49,6 +49,6 @@
 
   // add additional JS to initialize select below
   const selectEl = document.getElementById('id_service');
-  M.FormSelect.init(selectEl);  
+  S.FormSelect.init(selectEl);  
 </script>
 {% endblock %}
