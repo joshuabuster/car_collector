@@ -20,7 +20,7 @@
   <div class="col s6">
     <form action="{% url 'add_service' car.id %}" method="POST">
       {% csrf_token %}
-      {{ servicescompleted_form.as_p }}
+      {{ service_form.as_p }}
       <input type="submit" class="btn" value="Add Service">
     </form>    
     <table class="striped">
@@ -40,7 +40,7 @@
 </div>
 <script>
   const dateEl = document.getElementById('id_date');
-  S.Datepicker.init(dateEl, {
+  M.Datepicker.init(dateEl, {
     format: 'yyyy-mm-dd',
     defaultDate: new Date(),
     setDefaultDate: true,
@@ -49,6 +49,6 @@
 
   // add additional JS to initialize select below
   const selectEl = document.getElementById('id_service');
-  S.FormSelect.init(selectEl);  
+  M.FormSelect.init(selectEl);  
 </script>
 {% endblock %}

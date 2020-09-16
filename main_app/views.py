@@ -21,7 +21,8 @@ def cars_index(request):
 #  Define the details view
 def cars_detail(request, car_id):
   car = Car.objects.get(id=car_id)
-  return render(request, 'cars/detail.html', { 'car': car })
+  service_form = ServicesForm()
+  return render(request, 'cars/detail.html', { 'car': car, 'service_form': service_form})
 
 def add_service(request, car_id):
   # create a ModelForm instance using the data in request.POST
