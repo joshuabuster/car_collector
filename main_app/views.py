@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from .models import Car
-# Add the following import
-from django.http import HttpResponse
+
 
 # Create your views here.
 # Define the home view
 def home(request):
-  return HttpResponse('<h1>Home Page</h1>')
+  return render(request, 'home.html')
 
 # Define the about view
 def about(request):
