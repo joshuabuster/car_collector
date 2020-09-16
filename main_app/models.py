@@ -2,6 +2,11 @@ from django.db import models
 # Import the reverse function
 from django.urls import reverse
 
+SERVICES =   (
+    ('O', 'Oil Service'),
+    ('T', 'Tire Service'),
+    ('X', 'Other Service')
+)
 
 # Create your models here.
 class Car(models.Model):
@@ -15,3 +20,16 @@ class Car(models.Model):
     # Add this method to redirect to cat that was just created
     def get_absolute_url(self):
         return reverse('detail', kwargs={'car_id': self.id})
+
+class ServicesCompleted(models.Model):
+    date = models.DateField('Service Date')
+    service = models.CharField(max_length=1, choices=SERVICES, default=SERVICES[2][0])
+
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+
+    def __str__(self):
+        # Nice method for obtaining the friendly value of a Field.choice
+        return f"{self.get_service_display()} on {self.date}" 
+
+    class Meta:
+        ordering = ['-date']   
