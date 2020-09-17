@@ -37,6 +37,48 @@
       </tbody>
     </table>
   </div>
+  <hr>
+  <div class="row">
+    <div class="col s6">
+      <h3>The {{ car.name }}'s Shows</h3>
+      {% if car.shows.count %}
+        {% for show in car.shows.all %}
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">
+                 <h3>{{ show.name }}</h3>
+              </span>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <h5>No Shows Yet</h5>
+      {% endif %}
+    </div>  
+  </div>
+  <!-- Available toys will come after this line -->
+  <div class="col s6">
+    <h3>Available Shows</h3>
+    {% if shows.count %}
+      {% for show in shows.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              <h3>{{ show.name }}</h3>
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>The {{car.model}} Has Already Has Been To All Shows Available</h5>
+    {% endif %}
+  </div>    
 </div>
 <script>
   const dateEl = document.getElementById('id_date');

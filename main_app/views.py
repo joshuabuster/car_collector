@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from .models import Car, Show
 from .forms import ServicesForm
 
@@ -57,10 +58,11 @@ class ShowDetail(DetailView):
 
 class ShowCreate(CreateView):
   model = Show
+  fields = '__all__'
 
 class ShowUpdate(UpdateView):
   model = Show
-  fields = ['name', 'location', 'winnings']
+  fields = ['name', 'location']
 
 class ShowDelete(DeleteView):
   model = Show
