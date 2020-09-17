@@ -1,6 +1,6 @@
 from django.db import models
-# Import the reverse function
 from django.urls import reverse
+from datetime import date
 
 SERVICES =   (
     ('O', 'Oil Service'),
@@ -8,11 +8,23 @@ SERVICES =   (
     ('X', 'Other Service')
 )
 
+class Show(models.Model):
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    winnings = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('show_detail', kwargs={'pk': self.id})
+
 # Create your models here.
 class Car(models.Model):
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     year = models.IntegerField()
+    shows = models.ManyToManyField(Show)
 
     def __str__(self):
         return self.model

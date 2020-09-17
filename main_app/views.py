@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Car
+from .models import Car, Show
 from .forms import ServicesForm
 
 
@@ -21,8 +21,9 @@ def cars_index(request):
 #  Define the details view
 def cars_detail(request, car_id):
   car = Car.objects.get(id=car_id)
+  shows_car_doesnt_have = Show.objects.exclude(id__in = car.shows.all().values_list('id'))  
   service_form = ServicesForm()
-  return render(request, 'cars/detail.html', { 'car': car, 'service_form': service_form})
+  return render(request, 'cars/detail.html', { 'car': car, 'service_form': service_form, 'shows': shows_car_doesnt_have })
 
 def add_service(request, car_id):
   # create a ModelForm instance using the data in request.POST
@@ -47,3 +48,25 @@ class CarUpdate(UpdateView):
 class CarDelete(DeleteView):
   model = Car
   success_url = '/cars/'
+
+class ShowList(ListView):
+  model = Show
+
+class ShowDetail(DetailView):
+  model = Show
+
+class ShowCreate(CreateView):
+  model = Show
+
+class ShowUpdate(UpdateView):
+  model = Show
+  fields = ['name', 'location', 'winnings']
+
+class ShowDelete(DeleteView):
+  model = Show
+  success_url = '/shows/'
+
+def assoc_show(request, car_id, show_id):
+  # Note that you can pass a toy's id instead of the whole object
+  Car.objects.get(id=car_id).shows.add(show_id)
+  return redirect('detail', car_id=car_id)
