@@ -4,7 +4,7 @@
 <h1>List of Shows</h1>
 
 {% for show in show_list %}
-  <a href="{% url 'show_detail' show.id %}">
+  <a href="{% url 'shows_detail' show.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ show.name }}</span>

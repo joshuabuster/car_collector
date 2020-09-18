@@ -16,7 +16,7 @@ class Show(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('show_detail', kwargs={'pk': self.id})
+        return reverse('shows_detail', kwargs={'pk': self.id})
 
 # Create your models here.
 class Car(models.Model):
