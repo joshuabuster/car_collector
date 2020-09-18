@@ -6,6 +6,19 @@ from .forms import ServicesForm
 
 
 # Create your views here.
+
+class CarCreate(CreateView):
+  model = Car
+  fields = ['make', 'model', 'year']
+
+class CarUpdate(UpdateView):
+  model = Car
+  fields = ['make', 'year']
+
+class CarDelete(DeleteView):
+  model = Car
+  success_url = '/cars/'
+
 # Define the home view
 def home(request):
   return render(request, 'home.html')
@@ -37,18 +50,6 @@ def add_service(request, car_id):
     new_service.car_id = car_id
     new_service.save()
   return redirect('detail', car_id=car_id)
-
-class CarCreate(CreateView):
-  model = Car
-  fields = '__all__'
-
-class CarUpdate(UpdateView):
-  model = Car
-  fields = ['make', 'year']
-
-class CarDelete(DeleteView):
-  model = Car
-  success_url = '/cars/'
 
 class ShowList(ListView):
   model = Show
